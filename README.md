@@ -34,14 +34,6 @@ Luego abre `http://localhost:8501`.
 - `tmp_uploads/`: imagenes temporales; se excluyen del repositorio.
 - `.env.example`: plantilla de variables de entorno.
 - `requirements.txt`: dependencias de Python.
-
-## Publicar en Streamlit Community Cloud
-
-1. Sube este proyecto a un repositorio de GitHub.
-2. Crea una app nueva en Streamlit Community Cloud y selecciona `app.py` como archivo principal.
-3. En la configuracion de secrets agrega:
-
-```toml
 GEMINI_API_KEY = "tu_clave_de_gemini"
 ```
 
