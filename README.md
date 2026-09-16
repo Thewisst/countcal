@@ -16,7 +16,7 @@ python -m pip install -r requirements.txt
 Copy-Item .env.example .env
 ```
 
-Edita `.env` y agrega tu clave en `GEMINI_API_KEY`. No subas `.env` a GitHub.
+Edita `.env` y agrega tu clave en `GEMINI_API_KEY`. 
 
 ## Ejecutar
 
