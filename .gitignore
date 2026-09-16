@@ -1,0 +1,36 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Runtime data and uploaded images
+data/*
+!data/.gitkeep
+tmp_uploads/
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.heic
+*.heif
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
