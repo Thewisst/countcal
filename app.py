@@ -132,7 +132,15 @@ def crear_registro(resultado, dia_actual):
 def get_client():
     api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
-        st.error("Falta GEMINI_API_KEY en el archivo .env")
+        try:
+            api_key = st.secrets.get("GEMINI_API_KEY")
+        except Exception:
+            api_key = None
+    if not api_key:
+        st.error(
+            "Falta GEMINI_API_KEY. En local configúrala en .env; "
+            "en Streamlit Cloud agrégala en Settings > Secrets."
+        )
         st.stop()
     return genai.Client(api_key=api_key)
 

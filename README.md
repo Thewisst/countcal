@@ -52,11 +52,15 @@ Esta versión conserva el análisis con Gemini, la subida de fotos, el contexto 
 
 1. Sube este proyecto a un repositorio de GitHub.
 2. Crea una app nueva en Streamlit Community Cloud y selecciona `app.py` como archivo principal.
-3. En la configuración de secrets agrega:
+3. En tu aplicación desplegada, abre `Settings` → `Secrets` y pega exactamente:
 
 ```toml
 GEMINI_API_KEY = "tu_clave_de_gemini"
 ```
+
+4. Guarda los Secrets y reinicia la aplicación.
+
+La clave no se sube a GitHub. Streamlit Cloud la inyecta de forma segura cuando ejecuta `app.py`. En local, la aplicación la lee desde `.env`.
 
 No publiques la clave en el código, README ni commits.
 
