@@ -26,19 +26,6 @@ python -m streamlit run app.py
 
 Luego abre `http://localhost:8501`.
 
-## Usarla como app en el celular
-
-La aplicación es responsive y puede instalarse como una app web desde el navegador.
-
-1. Publica la aplicación en Streamlit Community Cloud siguiendo la sección inferior.
-2. Abre el enlace público desde el celular.
-3. En Android, abre el menú del navegador y selecciona `Instalar aplicación` o `Agregar a pantalla de inicio`.
-4. En iPhone, abre el menú de compartir de Safari y selecciona `Agregar a pantalla de inicio`.
-
-Después aparecerá un icono en la pantalla del teléfono y podrás abrir el analizador como una aplicación.
-
-Esta versión conserva el análisis con Gemini, la subida de fotos, el contexto adicional y el tracker diario. Para una app nativa publicada en Play Store o App Store habría que crear además un cliente Android/iOS y un backend seguro para la clave de Gemini.
-
 ## Estructura
 
 - `app.py`: aplicación principal.
@@ -47,20 +34,3 @@ Esta versión conserva el análisis con Gemini, la subida de fotos, el contexto 
 - `tmp_uploads/`: imágenes temporales; se excluyen del repositorio.
 - `.env.example`: plantilla de variables de entorno.
 - `requirements.txt`: dependencias de Python.
-
-## Publicar en Streamlit Community Cloud
-
-1. Sube este proyecto a un repositorio de GitHub.
-2. Crea una app nueva en Streamlit Community Cloud y selecciona `app.py` como archivo principal.
-3. En tu aplicación desplegada, abre `Settings` → `Secrets` y pega exactamente:
-
-```toml
-GEMINI_API_KEY = "tu_clave_de_gemini"
-```
-
-4. Guarda los Secrets y reinicia la aplicación.
-
-La clave no se sube a GitHub. Streamlit Cloud la inyecta de forma segura cuando ejecuta `app.py`. En local, la aplicación la lee desde `.env`.
-
-No publiques la clave en el código, README ni commits.
-
