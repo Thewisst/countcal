@@ -13,6 +13,25 @@ load_dotenv()
 
 st.set_page_config(page_title="Analizador de comida", page_icon="🍽️", layout="centered")
 
+st.markdown(
+    """
+    <style>
+    @media (max-width: 640px) {
+        .block-container {
+            padding: 1rem 0.75rem 2rem;
+        }
+        h1 {
+            font-size: 1.8rem;
+        }
+        button, [data-testid="stFileUploader"] section {
+            min-height: 3rem;
+        }
+    }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
 data_dir = Path("./data")
 data_dir.mkdir(exist_ok=True)
 registro_path = data_dir / "registro_comidas.json"
@@ -189,32 +208,33 @@ if uploaded_file is not None:
 
         st.image(str(temp_path), caption="Imagen subida", use_container_width=True)
 
-    usar_contexto = st.checkbox("Agregar texto extra para ayudar a la IA", value=False)
-    contexto_extra = ""
-    if usar_contexto:
-        contexto_extra = st.text_area(
-            "Escribe materiales o detalles del plato (opcional):",
-            placeholder="Ejemplo: pollo, arroz, aguacate, salsa de tomate, sin queso...",
-            height=120,
-        )
+        usar_contexto = st.checkbox("Agregar texto extra para ayudar a la IA", value=False)
+        contexto_extra = ""
+        if usar_contexto:
+            contexto_extra = st.text_area(
+                "Escribe materiales o detalles del plato (opcional):",
+                placeholder="Ejemplo: pollo, arroz, aguacate, salsa de tomate, sin queso...",
+                height=120,
+            )
 
-    if st.button("Analizar comida"):
-        with st.spinner("Analizando la imagen..."):
-            try:
-                resultado = analizar_imagen(str(temp_path), contexto_extra)
-                calorias = extraer_calorias(resultado)
-                st.success("Resultado")
-                st.text(resultado)
+        if st.button("Analizar comida", type="primary", use_container_width=True):
+            with st.spinner("Analizando la imagen..."):
+                try:
+                    resultado = analizar_imagen(str(temp_path), contexto_extra)
+                    st.success("Resultado")
+                    st.text(resultado)
 
-                guardar = st.checkbox("Guardar esta comida en el tracker del día", value=True)
-                if guardar:
-                    nuevo_registro = crear_registro(resultado, dia_actual)
-                    registros.append(nuevo_registro)
-                    guardar_registros(registros)
-                    total_actual = obtener_total_por_dia(registros, str(dia_actual))
-                    st.success(f"Comida guardada. Total del día: {total_actual} kcal")
-            except Exception as exc:
-                st.error(f"Error: {exc}")
+                    guardar = st.checkbox(
+                        "Guardar esta comida en el tracker del día", value=True
+                    )
+                    if guardar:
+                        nuevo_registro = crear_registro(resultado, dia_actual)
+                        registros.append(nuevo_registro)
+                        guardar_registros(registros)
+                        total_actual = obtener_total_por_dia(registros, str(dia_actual))
+                        st.success(f"Comida guardada. Total del día: {total_actual} kcal")
+                except Exception as exc:
+                    st.error(f"Error: {exc}")
 
 st.subheader("📊 Tracker semanal")
 
